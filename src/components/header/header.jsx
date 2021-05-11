@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 const Header = ({imgAvatar, mainTitle}) => {
   return (
@@ -22,6 +23,11 @@ const Header = ({imgAvatar, mainTitle}) => {
       </div>
     </header>
   );
+};
+
+Header.propTypes = {
+  imgAvatar: PropTypes.string,
+  mainTitle: PropTypes.string,
 };
 
 export default Header;

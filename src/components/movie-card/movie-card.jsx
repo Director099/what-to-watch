@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 const MovieCard = ({children}) => {
   return (
@@ -43,6 +44,10 @@ const MovieCard = ({children}) => {
       </div>
     </section>
   );
+};
+
+MovieCard.propTypes = {
+  children: PropTypes.element,
 };
 
 export default MovieCard;
