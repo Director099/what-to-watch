@@ -15,4 +15,8 @@ export const films = [
     title: `Aviator`,
     img: `img/aviator.jpg`,
   },
+  {
+    title: `We need to talk about Kevin`,
+    img: `img/we-need-to-talk-about-kevin.jpg`,
+  },
 ];

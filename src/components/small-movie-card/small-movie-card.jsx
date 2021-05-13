@@ -1,9 +1,13 @@
 import React from 'react';
 import PropTypes from "prop-types";
 
-export const SmallMovieCard = ({title, img, className}) => {
+export const SmallMovieCard = ({title, img, className, onMouseEnter = () => {}, onMouseLeave}) => {
   return (
-    <article className={`small-movie-card ${className}`}>
+    <article
+      className={`small-movie-card ${className}`}
+      onMouseEnter={() => onMouseEnter()}
+      onMouseLeave={onMouseLeave}
+    >
       <div className="small-movie-card__image">
         <img src={img} alt={title} width="280" height="175"/>
       </div>
@@ -18,4 +22,6 @@ SmallMovieCard.propTypes = {
   title: PropTypes.string,
   img: PropTypes.string,
   className: PropTypes.string,
+  onMouseEnter: PropTypes.func,
+  onMouseLeave: PropTypes.func
 };
