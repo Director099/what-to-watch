@@ -3,6 +3,37 @@ import {SmallMovieCard} from "../small-movie-card/small-movie-card";
 import {CatalogGenresList} from "../catalog-genres-list/catalog-genres-list";
 
 const Catalog = ({movie}) => {
+  let timer;
+  const mouseOverHandler = (e, {img, prevVideo}) => {
+    const video = document.createElement(`video`);
+    const picturePrev = e.currentTarget.querySelector(`img`);
+    const prevElement = e.currentTarget.querySelector(`.small-movie-card__image`);
+    video.poster = img;
+    video.src = prevVideo;
+    video.muted = true;
+    video.style.objectFit = `cover`;
+    video.style.width = `100%`;
+    video.style.height = `100%`;
+    timer = setTimeout(() => {
+      if (!prevElement.querySelector(`video`)) {
+        prevElement.prepend(video);
+        picturePrev.style.display = `none`;
+        video.play();
+      }
+    }, 1000);
+  };
+
+  const mouseOutHandler = (e) => {
+    clearTimeout(timer);
+    const videoElem = e.currentTarget.querySelector(`video`);
+    const picturePrev = e.currentTarget.querySelector(`img`);
+    picturePrev.style.display = `block`;
+    if (videoElem) {
+      videoElem.pause();
+      videoElem.remove();
+    }
+  };
+
   return (
     <section className="catalog">
       <h2 className="catalog__title visually-hidden">Catalog</h2>
@@ -10,13 +41,15 @@ const Catalog = ({movie}) => {
       <CatalogGenresList />
 
       <div className="catalog__movies-list">
-        {movie.map(({title, img}, index) =>
+        {movie.map(({title, img, prevVideo}, index) =>
           <SmallMovieCard
             key={`answer-${index}`}
             title={title}
             img={img}
+            prevVideo={prevVideo}
             className="catalog__movies-card"
-            onMouseLeave={() => console.log(index)}
+            onMouseOut={mouseOutHandler}
+            onMouseOver={(e) => mouseOverHandler(e, {img, prevVideo})}
           />
         )}
       </div>
