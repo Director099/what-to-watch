@@ -4,15 +4,15 @@ import Footer from "../footer/footer";
 import PageContent from "../page-content/page-content";
 import Catalog from "../catalog/catalog";
 import Header from "../header/header";
+import MovieCardFull from "../movie-card-full/movie-card-full";
 
 const App = ({movie}) => {
   return (
     <>
-      <MovieCard>
+      <MovieCardFull movie={movie}>
         <Header imgAvatar="img/avatar.jpg" />
-      </MovieCard>
+      </MovieCardFull>
       <PageContent>
-        <Catalog movie={movie}/>
         <Footer/>
       </PageContent>
     </>
