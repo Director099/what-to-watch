@@ -48,29 +48,7 @@ const MovieCardFull = ({children, movie}) => {
           </div>
 
           <div className="movie-card__desc">
-            <MovieNav/>
-
-            <div className="movie-rating">
-              <div className="movie-rating__score">{currentFilm.rating}</div>
-              <p className="movie-rating__meta">
-                <span className="movie-rating__level">Very good</span>
-                <span className="movie-rating__count">{currentFilm.votes} ratings</span>
-              </p>
-            </div>
-
-            <div className="movie-card__text">
-              {currentFilm.description.map((item, index) =>
-                <p key={`key-` + index}>{item}</p>
-              )}
-
-              <p className="movie-card__director">
-                <strong>Director: {currentFilm.director}</strong>
-              </p>
-
-              <p className="movie-card__starring">
-                <strong>Starring: {currentFilm.starring.map((item) => item + `, `)} and other</strong>
-              </p>
-            </div>
+            <MovieNav movie={currentFilm}/>
           </div>
         </div>
       </div>
