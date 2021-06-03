@@ -1,6 +1,5 @@
-import React from "react";
+import React, {useState} from "react";
 import {SmallMovieCard} from "../small-movie-card/small-movie-card";
-import {CatalogGenresList} from "../catalog-genres-list/catalog-genres-list";
 
 const Catalog = ({movie}) => {
   let timer;
@@ -34,14 +33,44 @@ const Catalog = ({movie}) => {
     }
   };
 
+  const [activeFilter, setActiveFilter] = useState(``);
+  const clickHandlerActive = (text) => {
+    setActiveFilter(text);
+  };
+
+  let filterFilm = movie.filter((cinema) => {
+    return cinema.genre === activeFilter;
+  });
+
+  const filterGenreElem = movie.filter((item, index) => {
+    const arrayGenre = [].push(item.genre);
+    console.log(arrayGenre, item.genre)
+
+  });
+
+  // console.log(filterGenreElem)
+
   return (
     <section className="catalog">
       <h2 className="catalog__title visually-hidden">Catalog</h2>
 
-      <CatalogGenresList />
+      <ul className="catalog__genres-list">
+        <li className="catalog__genres-item">
+          <a href="#" className="catalog__genres-link">All genres</a>
+        </li>
+        {movie.map(({genre}, index) =>
+          <li
+            className={`catalog__genres-item ${activeFilter === genre && `catalog__genres-item--active`}`}
+            key={`genre-${index}`}
+            onClick={() => clickHandlerActive(genre)}
+          >
+            <a href="#" className="catalog__genres-link">{genre}</a>
+          </li>
+        )}
+      </ul>
 
       <div className="catalog__movies-list">
-        {movie.map(({title, img, prevVideo}, index) =>
+        {filterFilm.map(({title, img, prevVideo}, index) =>
           <SmallMovieCard
             key={`answer-${index}`}
             title={title}

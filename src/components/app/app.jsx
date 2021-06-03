@@ -9,10 +9,11 @@ import MovieCardFull from "../movie-card-full/movie-card-full";
 const App = ({movie}) => {
   return (
     <>
-      <MovieCardFull movie={movie}>
+      <MovieCard>
         <Header imgAvatar="img/avatar.jpg" />
-      </MovieCardFull>
+      </MovieCard>
       <PageContent>
+        <Catalog movie={movie}/>
         <Footer/>
       </PageContent>
     </>
