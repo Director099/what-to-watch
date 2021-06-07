@@ -33,13 +33,18 @@ const Catalog = ({movie}) => {
     }
   };
 
-  const [activeFilter, setActiveFilter] = useState(`All genres`);
+  const ALL_GENRES = `All genres`;
+  const [activeFilter, setActiveFilter] = useState(ALL_GENRES);
   const clickHandlerActive = (text) => {
     setActiveFilter(text);
   };
 
   let filterFilm = movie.filter((cinema) => {
-    return cinema.genre === activeFilter;
+    if (ALL_GENRES === activeFilter) {
+      return movie;
+    } else if (cinema.genre === activeFilter) {
+      return cinema.genre === activeFilter;
+    }
   });
 
   let genres = [];
@@ -56,8 +61,8 @@ const Catalog = ({movie}) => {
       <h2 className="catalog__title visually-hidden">Catalog</h2>
 
       <ul className="catalog__genres-list">
-        <li className={`catalog__genres-item ${activeFilter === `All genres` && `catalog__genres-item--active`}`}>
-          <a href="#" className="catalog__genres-link" onClick={() => clickHandlerActive(`All genres`)}>All genres</a>
+        <li className={`catalog__genres-item ${activeFilter === ALL_GENRES && `catalog__genres-item--active`}`}>
+          <a href="#" className="catalog__genres-link" onClick={() => clickHandlerActive(ALL_GENRES)}>All genres</a>
         </li>
         {arrSingleGenres.map((genre, index) =>
           <li
