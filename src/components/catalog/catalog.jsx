@@ -33,7 +33,7 @@ const Catalog = ({movie}) => {
     }
   };
 
-  const [activeFilter, setActiveFilter] = useState(``);
+  const [activeFilter, setActiveFilter] = useState(`All genres`);
   const clickHandlerActive = (text) => {
     setActiveFilter(text);
   };
@@ -42,23 +42,24 @@ const Catalog = ({movie}) => {
     return cinema.genre === activeFilter;
   });
 
-  const filterGenreElem = movie.filter((item, index) => {
-    const arrayGenre = [].push(item.genre);
-    console.log(arrayGenre, item.genre)
-
+  let genres = [];
+  movie.forEach((item) => {
+    return genres.push(item.genre);
   });
 
-  // console.log(filterGenreElem)
+  const arrSingleGenres = genres.filter((item, index) => {
+    return genres.indexOf(item) === index;
+  });
 
   return (
     <section className="catalog">
       <h2 className="catalog__title visually-hidden">Catalog</h2>
 
       <ul className="catalog__genres-list">
-        <li className="catalog__genres-item">
-          <a href="#" className="catalog__genres-link">All genres</a>
+        <li className={`catalog__genres-item ${activeFilter === `All genres` && `catalog__genres-item--active`}`}>
+          <a href="#" className="catalog__genres-link" onClick={() => clickHandlerActive(`All genres`)}>All genres</a>
         </li>
-        {movie.map(({genre}, index) =>
+        {arrSingleGenres.map((genre, index) =>
           <li
             className={`catalog__genres-item ${activeFilter === genre && `catalog__genres-item--active`}`}
             key={`genre-${index}`}
