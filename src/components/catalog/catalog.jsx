@@ -1,8 +1,17 @@
 import React, {useState} from "react";
+import {useStore} from "effector-react";
 import {SmallMovieCard} from "../small-movie-card/small-movie-card";
+import {
+  $films,
+} from "../../model";
 
-const Catalog = ({movie}) => {
+const Catalog = () => {
+  const films = useStore($films);
+  const ALL_GENRES = `All genres`;
   let timer;
+
+  let genres = [];
+
   const mouseOverHandler = (e, {img, prevVideo}) => {
     const video = document.createElement(`video`);
     const picturePrev = e.currentTarget.querySelector(`img`);
@@ -33,22 +42,21 @@ const Catalog = ({movie}) => {
     }
   };
 
-  const ALL_GENRES = `All genres`;
+  const [currentNumberMovies, setCurrentNumberMovies] = useState(8);
   const [activeFilter, setActiveFilter] = useState(ALL_GENRES);
   const clickHandlerActive = (text) => {
     setActiveFilter(text);
   };
 
-  let filterFilm = movie.filter((cinema) => {
+  const filterFilm = films.filter((cinema) => {
     if (ALL_GENRES === activeFilter) {
-      return movie;
+      return films;
     } else if (cinema.genre === activeFilter) {
       return cinema.genre === activeFilter;
     }
   });
 
-  let genres = [];
-  movie.forEach((item) => {
+  films.forEach((item) => {
     return genres.push(item.genre);
   });
 
@@ -62,7 +70,7 @@ const Catalog = ({movie}) => {
 
       <ul className="catalog__genres-list">
         <li className={`catalog__genres-item ${activeFilter === ALL_GENRES && `catalog__genres-item--active`}`}>
-          <a href="#" className="catalog__genres-link" onClick={() => clickHandlerActive(ALL_GENRES)}>All genres</a>
+          <a className="catalog__genres-link" onClick={() => clickHandlerActive(ALL_GENRES)}>All genres</a>
         </li>
         {arrSingleGenres.map((genre, index) =>
           <li
@@ -70,28 +78,33 @@ const Catalog = ({movie}) => {
             key={`genre-${index}`}
             onClick={() => clickHandlerActive(genre)}
           >
-            <a href="#" className="catalog__genres-link">{genre}</a>
+            <a className="catalog__genres-link">{genre}</a>
           </li>
         )}
       </ul>
 
       <div className="catalog__movies-list">
         {filterFilm.map(({title, img, prevVideo}, index) =>
-          <SmallMovieCard
-            key={`answer-${index}`}
-            title={title}
-            img={img}
-            prevVideo={prevVideo}
-            className="catalog__movies-card"
-            onMouseOut={mouseOutHandler}
-            onMouseOver={(e) => mouseOverHandler(e, {img, prevVideo})}
-          />
+          <>
+            {index < currentNumberMovies &&
+              <SmallMovieCard
+                key={`answer-${index}`}
+                title={title}
+                img={img}
+                prevVideo={prevVideo}
+                className="catalog__movies-card"
+                onMouseOut={mouseOutHandler}
+                onMouseOver={(e) => mouseOverHandler(e, {img, prevVideo})}
+              />
+            }
+          </>
         )}
       </div>
-
-      <div className="catalog__more">
-        <button className="catalog__button" type="button">Show more</button>
-      </div>
+      {currentNumberMovies < filterFilm.length &&
+        <div className="catalog__more">
+          <button className="catalog__button" type="button" onClick={() => setCurrentNumberMovies(currentNumberMovies + 4)}>Show more</button>
+        </div>
+      }
     </section>
   );
 };

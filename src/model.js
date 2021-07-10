@@ -1,8 +1,8 @@
-import {createStore, createEvent, combine} from 'effector';
-// сторы
+import {createStore} from 'effector';
+import {films} from "./mock/films";
 
-// все задачи
-export const $todos = createStore([]);
+const $films = createStore(films);
 
-// текущий фильтр, для простоты будет null/true/false
-export const $activeFilter = createStore(null);
+export {
+  $films,
+};
