@@ -10,8 +10,6 @@ const Catalog = () => {
   const ALL_GENRES = `All genres`;
   let timer;
 
-  let genres = [];
-
   const mouseOverHandler = (e, {img, prevVideo}) => {
     const video = document.createElement(`video`);
     const picturePrev = e.currentTarget.querySelector(`img`);
@@ -56,9 +54,7 @@ const Catalog = () => {
     }
   });
 
-  films.forEach((item) => {
-    return genres.push(item.genre);
-  });
+  const genres = films.map((item) => item.genre);
 
   const arrSingleGenres = genres.filter((item, index) => {
     return genres.indexOf(item) === index;
