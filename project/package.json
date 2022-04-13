@@ -1,0 +1,54 @@
+{
+  "name": "project",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "axios": "^0.21.1",
+    "history": "^5.2.0",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "react-router-dom": "^6.2.1",
+    "react-scripts": "5.0.0",
+    "reselect": "^4.0.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --passWithNoTests",
+    "eject": "react-scripts eject",
+    "lint": "eslint --ext .tsx --ext .ts src/"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "^5.11.0",
+    "@testing-library/react": "^11.2.0",
+    "@testing-library/react-hooks": "^5.1.0",
+    "@testing-library/user-event": "^12.8.0",
+    "@types/faker": "^5.5.8",
+    "@types/jest": "^26.0.24",
+    "@types/node": "^12.20.47",
+    "@types/react": "^17.0.44",
+    "axios-mock-adapter": "^1.19.0",
+    "effector": "^22.2.0",
+    "effector-react": "^22.0.6",
+    "faker": "^5.5.3",
+    "typescript": "^4.6.3"
+  }
+}
