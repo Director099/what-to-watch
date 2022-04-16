@@ -3,9 +3,13 @@ import {MovieCardOverview} from "../movie-card-overview/movie-card-overview";
 import {MovieCardReviews} from "../movie-page-reviews/movie-page-reviews";
 import {MovieCardDetails} from "../movie-page-details/movie-page-detailst";
 
-export const MovieNav: FC = () => {
+interface IMovieNav {
+  movie: {}
+}
+
+export const MovieNav: FC<IMovieNav> = ({movie}) => {
   const tabsTemplate = {
-    overview: <MovieCardOverview />,
+    overview: <MovieCardOverview movie={movie}/>,
     details: <MovieCardDetails/>,
     reviews: <MovieCardReviews />,
   };
@@ -28,7 +32,7 @@ export const MovieNav: FC = () => {
           )}
         </ul>
       </nav>
-      {/*{tabsTemplate[active]}*/}
+      {tabsTemplate[active as keyof typeof tabsTemplate]}
     </>
   );
 };

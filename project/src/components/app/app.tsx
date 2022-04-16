@@ -1,23 +1,33 @@
-import {MovieCard} from '../movie-card/movie-card';
-import {Footer} from '../footer/footer';
-import {PageContent} from '../page-content/page-content';
-import {Header} from '../header/header';
-import {Catalog} from '../catalog/catalog';
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  Link
+} from "react-router-dom";
+import {Main} from "../../pages/main/main";
+import {MoviePage} from "../../pages/movie-page/movie-page";
+import {Header} from "../header/header";
+import {AddReview} from "../../pages/add-review/add-review";
+import {MyList} from "../../pages/my-list/my-list";
+import {Player} from "../../pages/player/player";
+import {SignIn} from "../../pages/sign-in/sign-in";
+import {films} from "../../mock/films";
 
-// import MovieCardFull from '../movie-card-full/movie-card-full';
-
-function App (): JSX.Element {
+export const App = () => {
   return (
-    <>
-      <MovieCard>
-        <Header imgAvatar='img/avatar.jpg'/>
-      </MovieCard>
-      <PageContent>
-        <Catalog />
-        <Footer/>
-      </PageContent>
-    </>
-  );
-}
-
-export default App;
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Main />} />
+        <Route path="/movie-page" element={
+          <MoviePage>
+            <Header imgAvatar='img/avatar.jpg'/>
+          </MoviePage>
+        } />
+        <Route path="/add-review" element={<AddReview/>} />
+        <Route path="/my-list" element={<MyList/>} />
+        <Route path="/player" element={<Player/>} />
+        <Route path="/sign-in" element={<SignIn />} />
+      </Routes>
+    </BrowserRouter>
+  )
+};

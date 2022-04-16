@@ -1,6 +1,4 @@
-import {createStore} from 'effector';
-
-export const $films = createStore([
+export const films = [
   {
     title: 'Fantastic Beasts: The Crimes of Grindelwald',
     img: 'img/fantastic-beasts-the-crimes-of-grindelwald.jpg',
@@ -793,4 +791,4 @@ export const $films = createStore([
     year: '2011',
     time: '1h 52min',
   },
-]);
+];

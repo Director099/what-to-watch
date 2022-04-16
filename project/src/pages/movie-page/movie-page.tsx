@@ -1,14 +1,14 @@
-import React, {FC} from "react";
-import {MovieNav} from "../movie-nav/movie-nav";
-import {useStore} from "effector-react";
-import {$films} from "../../mock/films";
+import React, {FC} from 'react';
+import {MovieNav} from "../../components/movie-nav/movie-nav";
+import {films} from "../../mock/films";
 
-interface IMovieCardFull {
+interface IMoviePage {
   children: React.ReactNode
 }
 
-export const MovieCardFull: FC<IMovieCardFull> = ({children}) => {
-  const currentFilm = useStore($films)[0];
+export const MoviePage: FC<IMoviePage> = ({children}) => {
+  const movie = films[0];
+  const {title, genre, year} = movie;
   return (
     <section className="movie-card movie-card--full">
       <div className="movie-card__hero">
@@ -22,10 +22,10 @@ export const MovieCardFull: FC<IMovieCardFull> = ({children}) => {
 
         <div className="movie-card__wrap">
           <div className="movie-card__desc">
-            <h2 className="movie-card__title">The Grand Budapest Hotel</h2>
+            <h2 className="movie-card__title">{title}</h2>
             <p className="movie-card__meta">
-              <span className="movie-card__genre">Drama</span>
-              <span className="movie-card__year">2014</span>
+              <span className="movie-card__genre">{genre}</span>
+              <span className="movie-card__year">{year}</span>
             </p>
 
             <div className="movie-card__buttons">
@@ -54,7 +54,7 @@ export const MovieCardFull: FC<IMovieCardFull> = ({children}) => {
           </div>
 
           <div className="movie-card__desc">
-            <MovieNav />
+            <MovieNav movie={movie} />
           </div>
         </div>
       </div>

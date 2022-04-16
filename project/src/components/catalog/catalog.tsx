@@ -1,10 +1,8 @@
 import React, {FC, useState} from "react";
 import {SmallMovieCard} from "../small-movie-card/small-movie-card";
-import {useStore} from "effector-react";
-import {$films} from "../../mock/films";
+import {films} from "../../mock/films";
 
 export const Catalog: FC = () => {
-  const films = useStore($films);
   const ALL_GENRES = `All genres`;
   const [currentNumberMovies, setCurrentNumberMovies] = useState(8);
   const [activeFilter, setActiveFilter] = useState(ALL_GENRES);
@@ -12,17 +10,17 @@ export const Catalog: FC = () => {
     setActiveFilter(text);
   };
 
-  const filterFilm = films.filter((cinema) => {
+  const filterFilm = films.filter(({genre}) => {
     if (ALL_GENRES === activeFilter) {
       return films;
-    } else if (cinema.genre === activeFilter) {
-      return cinema.genre === activeFilter;
+    } else if (genre === activeFilter) {
+      return genre === activeFilter;
     }
   });
 
-  const genres = films.map((item) => item.genre);
+  const genres = films.map(({genre}) => genre);
 
-  const arrSingleGenres = genres.filter((item, index) => {
+  const arrSingleGenres = genres.filter((item: string, index: number) => {
     return genres.indexOf(item) === index;
   });
 
@@ -34,7 +32,7 @@ export const Catalog: FC = () => {
         <li className={`catalog__genres-item ${activeFilter === ALL_GENRES && `catalog__genres-item--active`}`}>
           <a className="catalog__genres-link" onClick={() => clickHandlerActive(ALL_GENRES)}>All genres</a>
         </li>
-        {arrSingleGenres.map((genre, index) =>
+        {arrSingleGenres.map((genre: string, index: any) =>
           <li
             className={`catalog__genres-item ${activeFilter === genre && `catalog__genres-item--active`}`}
             key={`genre-${index}`}
@@ -46,7 +44,7 @@ export const Catalog: FC = () => {
       </ul>
 
       <div className="catalog__movies-list">
-        {filterFilm.map(({title, img, prevVideo}, index) =>
+        {filterFilm.map(({title, img, prevVideo}: any, index: number) =>
           <>
             {index < currentNumberMovies &&
               <SmallMovieCard
