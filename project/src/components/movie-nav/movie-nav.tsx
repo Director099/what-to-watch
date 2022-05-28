@@ -1,20 +1,26 @@
-import React, {FC, useState} from 'react';
+import React, {useState} from 'react';
 import {MovieCardOverview} from "../movie-card-overview/movie-card-overview";
 import {MovieCardReviews} from "../movie-page-reviews/movie-page-reviews";
 import {MovieCardDetails} from "../movie-page-details/movie-page-detailst";
 
 
-export const MovieNav = (movie: any) => {
+export const MovieNav = ({movie}: any) => {
   const tabsTemplate = {
     overview: <MovieCardOverview
-      description={movie.description}
-      starring={movie.starring}
-      director={movie.director}
-      votes={movie.votes}
-      rating={movie.rating}
+      description={movie?.description}
+      starring={movie?.starring}
+      director={movie?.director}
+      votes={movie?.votes}
+      rating={movie?.rating}
     />,
-    details: <MovieCardDetails/>,
-    reviews: <MovieCardReviews />,
+    details: <MovieCardDetails
+      time={movie?.time}
+      genre={movie?.genre}
+      year={movie?.year}
+      director={movie?.director}
+      starring={movie?.starring}
+    />,
+    reviews: <MovieCardReviews reviews={movie?.reviews}/>,
   };
   const [active, setActive] = useState(Object.keys(tabsTemplate)[0]);
   const clickHandlerActive = (index: number) => {

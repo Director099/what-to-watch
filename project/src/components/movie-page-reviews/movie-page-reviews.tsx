@@ -1,23 +1,27 @@
-import {FC} from 'react';
+interface IReview {
+  author: string,
+  date: string,
+  rating: string,
+  text: string,
+  id: string
+}
 
-export const MovieCardReviews: FC = () => {
+export const MovieCardReviews = ({reviews}: any) => {
   return (
     <div className="movie-card__reviews movie-card__row">
       <div className="movie-card__reviews-col">
-        <div className="review">
-          <blockquote className="review__quote">
-            <p className="review__text">Discerning travellers and Wes Anderson fans will luxuriate in the glorious
-              Mittel-European kitsch of one of the director's funniest and most exquisitely designed movies in years.
-            </p>
-
-            <footer className="review__details">
-              <cite className="review__author">Kate Muir</cite>
-              <time className="review__date" dateTime="2016-12-24">December 24, 2016</time>
-            </footer>
-          </blockquote>
-
-          <div className="review__rating">8,9</div>
-        </div>
+        {reviews?.map(({author, date, rating, text, id}: IReview) =>
+          <div className="review" key={id}>
+            <blockquote className="review__quote">
+              <p className="review__text">{text}</p>
+              <footer className="review__details">
+                <cite className="review__author">{author}</cite>
+                <time className="review__date" dateTime="2016-12-24">{date}</time>
+              </footer>
+            </blockquote>
+            <div className="review__rating">{rating}</div>
+          </div>
+        )}
       </div>
     </div>
   );
