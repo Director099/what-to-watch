@@ -8,7 +8,6 @@ interface IMoviePage {
 
 export const MoviePage: FC<IMoviePage> = ({children}) => {
   const movie = films[0];
-  console.log(movie)
   const {title, genre, year} = movie;
   return (
     <section className="movie-card movie-card--full">
