@@ -1,19 +1,14 @@
 import {FC} from "react";
 
-interface IMovieCardOverview {
-  movie: {},
-}
-
 interface IMovie {
-  description: string,
+  description: string[],
   rating: string,
   votes: string,
   director: string,
   starring: string[]
 }
 
-export const MovieCardOverview = ({movie}: IMovie) => {
-  // const film = movie as IMovie;
+export const MovieCardOverview: FC<IMovie> = ({description, starring, director, votes, rating}) => {
   return (
     <>
       <div className="movie-rating">

@@ -3,13 +3,16 @@ import {MovieCardOverview} from "../movie-card-overview/movie-card-overview";
 import {MovieCardReviews} from "../movie-page-reviews/movie-page-reviews";
 import {MovieCardDetails} from "../movie-page-details/movie-page-detailst";
 
-interface IMovieNav {
-  movie: {}
-}
 
-export const MovieNav: FC<IMovieNav> = ({movie}) => {
+export const MovieNav = (movie: any) => {
   const tabsTemplate = {
-    overview: <MovieCardOverview movie={movie}/>,
+    overview: <MovieCardOverview
+      description={movie.description}
+      starring={movie.starring}
+      director={movie.director}
+      votes={movie.votes}
+      rating={movie.rating}
+    />,
     details: <MovieCardDetails/>,
     reviews: <MovieCardReviews />,
   };
