@@ -32,7 +32,7 @@ export const Main: FC = () => {
   return(
     <>
       <MovieCard>
-        <Header imgAvatar='img/avatar.jpg'/>
+        <Header imgAvatar='img/avatar.jpg' className="movie-card__head"/>
       </MovieCard>
       <PageContent>
         <Catalog title="Catalog">

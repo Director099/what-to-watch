@@ -1,4 +1,5 @@
 import React, {FC} from 'react';
+import {Link} from "react-router-dom";
 import {MovieNav} from "../../components/movie-nav/movie-nav";
 import {films} from "../../mock/films";
 import {Footer} from "../../components/footer/footer";
@@ -35,12 +36,12 @@ export const MoviePage: FC<IMoviePage> = ({children}) => {
               </p>
 
               <div className="movie-card__buttons">
-                <button className="btn btn--play movie-card__button" type="button">
+                <Link to="/player" className="btn btn--play movie-card__button" type="button">
                   <svg viewBox="0 0 19 19" width="19" height="19">
                     <use href="#play-s"></use>
                   </svg>
                   <span>Play</span>
-                </button>
+                </Link>
                 <button className="btn btn--list movie-card__button" type="button">
                   <svg viewBox="0 0 19 20" width="19" height="20">
                     <use href="#add"></use>
