@@ -4,14 +4,16 @@ import {Footer} from "../../components/footer/footer";
 import {Catalog} from "../../components/catalog/catalog";
 import {SmallMovieCard} from "../../components/small-movie-card/small-movie-card";
 import {films} from "../../mock/films";
+import {UserPage} from "../../components/user-page/user-page";
 
 export const MyList: FC = () => {
   return (
-    <div className="user-page">
+    <UserPage>
       <Header
         imgAvatar='img/avatar.jpg'
         mainTitle="My list"
         className="user-page__head"
+        authorized
       />
       <Catalog title="Catalog">
         <div className="catalog__movies-list">
@@ -31,6 +33,6 @@ export const MyList: FC = () => {
         </div>
       </Catalog>
       <Footer/>
-    </div>
+    </UserPage>
   )
 };

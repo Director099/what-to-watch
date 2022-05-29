@@ -1,12 +1,15 @@
 import {Link} from "react-router-dom";
+import React from "react";
 
 interface IHeader {
   imgAvatar: string,
   mainTitle?: string,
-  className?: string
+  className?: string,
+  authorized?: boolean,
+  children?: React.ReactNode
 }
 
-export const Header: React.FC<IHeader> = ({imgAvatar, mainTitle, className = ''}) => (
+export const Header: React.FC<IHeader> = ({imgAvatar, mainTitle, children, className = '', authorized = false}) => (
   <header className={`page-header ${className}`}>
     <div className="logo">
       <Link to="/" className="logo__link">
@@ -16,12 +19,16 @@ export const Header: React.FC<IHeader> = ({imgAvatar, mainTitle, className = ''}
       </Link>
     </div>
 
+    {children}
+
     {mainTitle && <h1 className="page-title user-page__title">{mainTitle}</h1>}
 
-    <Link to="/my-list" className="user-block">
-      <div className="user-block__avatar">
-        <img src={imgAvatar} alt="User avatar" width="63" height="63"/>
-      </div>
-    </Link>
+    {authorized &&
+      <Link to="/my-list" className="user-block">
+        <div className="user-block__avatar">
+          <img src={imgAvatar} alt="User avatar" width="63" height="63"/>
+        </div>
+      </Link>
+    }
   </header>
 );

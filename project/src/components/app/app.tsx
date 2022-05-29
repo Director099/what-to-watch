@@ -18,7 +18,7 @@ export const App = () => {
         <Route path="/" element={<Main />} />
         <Route path="/movie-page" element={
           <MoviePage>
-            <Header imgAvatar='img/avatar.jpg' className="movie-card__head"/>
+            <Header imgAvatar='img/avatar.jpg' className="movie-card__head" authorized/>
           </MoviePage>
         } />
         <Route path="/add-review" element={<AddReview/>} />
