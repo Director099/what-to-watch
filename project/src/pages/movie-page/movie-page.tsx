@@ -7,7 +7,7 @@ import {PageContent} from "../../components/page-content/page-content";
 import {Catalog} from "../../components/catalog/catalog";
 import {SmallMovieCard} from "../../components/small-movie-card/small-movie-card";
 import {useGate, useStore} from "effector-react";
-import {$movie, gateCurrentFilmInit} from "../../feature/films/films";
+import {$commentFilm, $movie, gateCurrentFilmInit} from "../../feature/films/films";
 
 interface IMoviePage {
   children: React.ReactNode
@@ -15,11 +15,11 @@ interface IMoviePage {
 
 export const MoviePage: FC<IMoviePage> = ({children}) => {
   const MAX_LIKE_MOVIES = 4;
-
   const {id} = useParams();
   useGate(gateCurrentFilmInit, id);
 
   const movie = useStore($movie);
+  const commentFilm = useStore($commentFilm);
   const {
     name,
     genre,
@@ -74,7 +74,7 @@ export const MoviePage: FC<IMoviePage> = ({children}) => {
             </div>
 
             <div className="movie-card__desc">
-              <MovieNav movie={movie} />
+              <MovieNav movie={movie} reviews={commentFilm} />
             </div>
           </div>
         </div>

@@ -4,7 +4,7 @@ import {MovieCardReviews} from "../movie-page-reviews/movie-page-reviews";
 import {MovieCardDetails} from "../movie-page-details/movie-page-detailst";
 
 
-export const MovieNav = ({movie}: any) => {
+export const MovieNav = ({movie, reviews}: any) => {
   const tabsTemplate = {
     overview: <MovieCardOverview
       description={movie?.description}
@@ -20,7 +20,7 @@ export const MovieNav = ({movie}: any) => {
       director={movie?.director}
       starring={movie?.starring}
     />,
-    reviews: <MovieCardReviews reviews={movie?.reviews}/>,
+    reviews: <MovieCardReviews reviews={reviews}/>,
   };
   const [active, setActive] = useState(Object.keys(tabsTemplate)[0]);
   const clickHandlerActive = (index: number) => {
