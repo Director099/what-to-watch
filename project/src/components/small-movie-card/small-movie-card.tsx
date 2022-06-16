@@ -7,9 +7,10 @@ interface ISmallMovieCard {
   img: string,
   className: string,
   prevVideo: string,
+  id: number,
 }
 
-export const SmallMovieCard: FC<ISmallMovieCard> = ({title, img, className, prevVideo}) => {
+export const SmallMovieCard: FC<ISmallMovieCard> = ({title, img, className, prevVideo, id}) => {
   const [mouseOver, setMouseOver] = useState<boolean>(false);
   let timer: NodeJS.Timeout;
 
@@ -31,7 +32,7 @@ export const SmallMovieCard: FC<ISmallMovieCard> = ({title, img, className, prev
         <img src={img} alt={title} width="280" height="175"/>
       </div>
       <h3 className="small-movie-card__title">
-        <Link to="/movie-page" className="small-movie-card__link">{title}</Link>
+        <Link to={`/films/${id}`} className="small-movie-card__link">{title}</Link>
       </h3>
     </article>
   )

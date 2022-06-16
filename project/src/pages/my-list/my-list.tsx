@@ -17,7 +17,7 @@ export const MyList: FC = () => {
       />
       <Catalog title="Catalog">
         <div className="catalog__movies-list">
-          {films.map(({title, img, prevVideo}: any, index: number) =>
+          {films.map(({title, img, prevVideo, id}: any, index: number) =>
             <>
               {index < 9 &&
                 <SmallMovieCard
@@ -26,6 +26,7 @@ export const MyList: FC = () => {
                   img={img}
                   prevVideo={prevVideo}
                   className="catalog__movies-card"
+                  id={id}
                 />
               }
             </>

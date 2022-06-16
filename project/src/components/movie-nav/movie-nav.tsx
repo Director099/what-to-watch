@@ -10,7 +10,7 @@ export const MovieNav = ({movie}: any) => {
       description={movie?.description}
       starring={movie?.starring}
       director={movie?.director}
-      votes={movie?.votes}
+      scoresCount={movie?.scoresCount}
       rating={movie?.rating}
     />,
     details: <MovieCardDetails

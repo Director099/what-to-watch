@@ -5,9 +5,15 @@ import {PageContent} from "../../components/page-content/page-content";
 import {Catalog} from "../../components/catalog/catalog";
 import {Footer} from "../../components/footer/footer";
 import {SmallMovieCard} from "../../components/small-movie-card/small-movie-card";
-import {films} from "../../mock/films";
+import {$listFilms, gateInit} from "../../feature/films/films"
+import {useStore} from "effector-react/compat";
+import {useGate} from "effector-react";
+import avatar from "../../assets/img/avatar.jpg";
 
 export const Main: FC = () => {
+  useGate(gateInit);
+  const listFilms = useStore($listFilms);
+
   const ALL_GENRES = `All genres`;
   const [currentNumberMovies, setCurrentNumberMovies] = useState(8);
   const [activeFilter, setActiveFilter] = useState(ALL_GENRES);
@@ -15,24 +21,25 @@ export const Main: FC = () => {
     setActiveFilter(text);
   };
 
-  const filterFilm = films.filter(({genre}) => {
+  const filterFilm = listFilms.filter(({genre}) => {
     if (ALL_GENRES === activeFilter) {
-      return films;
+      return listFilms;
     } else if (genre === activeFilter) {
       return genre === activeFilter;
     }
   });
 
-  const genres = films.map(({genre}) => genre);
+  const genres = listFilms.map(({genre}) => genre);
 
   const arrSingleGenres = genres.filter((item: string, index: number) => {
+    // @ts-ignore
     return genres.indexOf(item) === index;
   });
 
   return(
     <>
       <MovieCard>
-        <Header imgAvatar='img/avatar.jpg' className="movie-card__head" authorized/>
+        <Header imgAvatar={avatar} className="movie-card__head" authorized/>
       </MovieCard>
       <PageContent>
         <Catalog title="Catalog">
@@ -52,24 +59,27 @@ export const Main: FC = () => {
           </ul>
 
           <div className="catalog__movies-list">
-            {filterFilm.map(({title, img, prevVideo}: any, index: number) =>
+            {filterFilm.map(({name, previewImage, videoLink, id}: any, index: number) =>
               <>
                 {index < currentNumberMovies &&
-                <SmallMovieCard
-                  key={`answer-${index}`}
-                  title={title}
-                  img={img}
-                  prevVideo={prevVideo}
-                  className="catalog__movies-card"
-                />
+                  <SmallMovieCard
+                    key={`answer-${index}`}
+                    title={name}
+                    img={previewImage}
+                    prevVideo={videoLink}
+                    className="catalog__movies-card"
+                    id={id}
+                  />
                 }
               </>
             )}
           </div>
           {currentNumberMovies < filterFilm.length &&
             <div className="catalog__more">
-              <button className="catalog__button" type="button"
-                      onClick={() => setCurrentNumberMovies(currentNumberMovies + 4)}>Show more
+              <button
+                className="catalog__button"
+                type="button"
+                onClick={() => setCurrentNumberMovies(currentNumberMovies + 4)}> Show more
               </button>
             </div>
           }

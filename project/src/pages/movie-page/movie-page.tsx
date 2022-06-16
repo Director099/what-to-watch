@@ -1,26 +1,39 @@
-import React, {FC} from 'react';
-import {Link} from "react-router-dom";
+import React, {CSSProperties, FC} from 'react';
+import {Link, useParams} from "react-router-dom";
 import {MovieNav} from "../../components/movie-nav/movie-nav";
 import {films} from "../../mock/films";
 import {Footer} from "../../components/footer/footer";
 import {PageContent} from "../../components/page-content/page-content";
 import {Catalog} from "../../components/catalog/catalog";
 import {SmallMovieCard} from "../../components/small-movie-card/small-movie-card";
+import {useGate, useStore} from "effector-react";
+import {$movie, gateCurrentFilmInit} from "../../feature/films/films";
 
 interface IMoviePage {
   children: React.ReactNode
 }
 
 export const MoviePage: FC<IMoviePage> = ({children}) => {
-  const movie = films[1];
   const MAX_LIKE_MOVIES = 4;
-  const {title, genre, year, img} = movie;
+
+  const {id} = useParams();
+  useGate(gateCurrentFilmInit, id);
+
+  const movie = useStore($movie);
+  const {
+    name,
+    genre,
+    released,
+    posterImage,
+    backgroundImage,
+    backgroundColor
+  }: any = movie;
   return (
     <>
-      <section className="movie-card movie-card--full">
+      <section className="movie-card movie-card--full" style={{backgroundColor}}>
         <div className="movie-card__hero">
           <div className="movie-card__bg">
-            <img src={img} alt={title}/>
+            <img src={backgroundImage} alt={name}/>
           </div>
 
           <h1 className="visually-hidden">WTW</h1>
@@ -29,10 +42,10 @@ export const MoviePage: FC<IMoviePage> = ({children}) => {
 
           <div className="movie-card__wrap">
             <div className="movie-card__desc">
-              <h2 className="movie-card__title">{title}</h2>
+              <h2 className="movie-card__title">{name}</h2>
               <p className="movie-card__meta">
                 <span className="movie-card__genre">{genre}</span>
-                <span className="movie-card__year">{year}</span>
+                <span className="movie-card__year">{released}</span>
               </p>
 
               <div className="movie-card__buttons">
@@ -57,7 +70,7 @@ export const MoviePage: FC<IMoviePage> = ({children}) => {
         <div className="movie-card__wrap movie-card__translate-top">
           <div className="movie-card__info">
             <div className="movie-card__poster movie-card__poster--big">
-              <img src={img} alt={title} width="218" height="327"/>
+              <img src={posterImage} alt={name} width="218" height="327"/>
             </div>
 
             <div className="movie-card__desc">
@@ -67,23 +80,24 @@ export const MoviePage: FC<IMoviePage> = ({children}) => {
         </div>
       </section>
       <PageContent>
-        <Catalog title="More like this" titleVisuallyHidden={false} className="catalog--like-this">
-          <div className="catalog__movies-list">
-            {films.map(({title, img, prevVideo}: any, index: number) =>
-              <>
-                {index < MAX_LIKE_MOVIES &&
-                  <SmallMovieCard
-                    key={`answer-${index}`}
-                    title={title}
-                    img={img}
-                    prevVideo={prevVideo}
-                    className="catalog__movies-card"
-                  />
-                }
-              </>
-            )}
-          </div>
-        </Catalog>
+        {/*<Catalog title="More like this" titleVisuallyHidden={false} className="catalog--like-this">*/}
+        {/*  <div className="catalog__movies-list">*/}
+        {/*    {films.map(({title, img, prevVideo, id}: any, index: number) =>*/}
+        {/*      <>*/}
+        {/*        {index < MAX_LIKE_MOVIES &&*/}
+        {/*          <SmallMovieCard*/}
+        {/*            key={`answer-${index}`}*/}
+        {/*            title={title}*/}
+        {/*            img={img}*/}
+        {/*            prevVideo={prevVideo}*/}
+        {/*            className="catalog__movies-card"*/}
+        {/*            id={id}*/}
+        {/*          />*/}
+        {/*        }*/}
+        {/*      </>*/}
+        {/*    )}*/}
+        {/*  </div>*/}
+        {/*</Catalog>*/}
         <Footer/>
       </PageContent>
     </>
