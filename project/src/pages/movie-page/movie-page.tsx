@@ -1,11 +1,8 @@
-import React, {CSSProperties, FC} from 'react';
+import React, {FC} from 'react';
 import {Link, useParams} from "react-router-dom";
 import {MovieNav} from "../../components/movie-nav/movie-nav";
-import {films} from "../../mock/films";
 import {Footer} from "../../components/footer/footer";
 import {PageContent} from "../../components/page-content/page-content";
-import {Catalog} from "../../components/catalog/catalog";
-import {SmallMovieCard} from "../../components/small-movie-card/small-movie-card";
 import {useGate, useStore} from "effector-react";
 import {$commentFilm, $movie, gateCurrentFilmInit} from "../../feature/films/films";
 import {Header} from "../../components/header/header";
