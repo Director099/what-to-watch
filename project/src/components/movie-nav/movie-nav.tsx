@@ -3,7 +3,6 @@ import {MovieCardOverview} from "../movie-card-overview/movie-card-overview";
 import {MovieCardReviews} from "../movie-page-reviews/movie-page-reviews";
 import {MovieCardDetails} from "../movie-page-details/movie-page-detailst";
 
-
 export const MovieNav = ({movie, reviews}: any) => {
   const tabsTemplate = {
     overview: <MovieCardOverview

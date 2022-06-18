@@ -30,10 +30,7 @@ export const Main: FC = () => {
 
   const genres = listFilms.map(({genre}) => genre);
 
-  const arrSingleGenres = genres.filter((item: string, index: number) => {
-    // @ts-ignore
-    return genres.indexOf(item) === index;
-  });
+  const arrSingleGenres = genres.filter((item, index) => genres.indexOf(item) === index);
 
   return(
     <>

@@ -1,17 +1,41 @@
 import React, {FC} from 'react';
+import {Link} from "react-router-dom";
 import {Header} from "../../components/header/header";
-import {useGate} from "effector-react";
-import {gateCurrentFilmInit} from "../../feature/films/films";
+import {useGate, useStore} from "effector-react";
+import {$movie, gateCurrentFilmInit} from "../../feature/films/films";
 import {useParams} from "react-router";
+
+interface IMovie {
+  name?: string,
+  genre?: string,
+  released?: string,
+  posterImage?: string,
+  backgroundImage?: string,
+  backgroundColor?: string,
+}
 
 export const AddReview: FC = () => {
   const {id} = useParams();
   useGate(gateCurrentFilmInit, id);
+  const movie = useStore<IMovie>($movie);
+
+  const {
+    name,
+    posterImage,
+    backgroundImage,
+    backgroundColor
+  } = movie;
+
+  const styled: React.CSSProperties = {
+    backgroundColor: backgroundColor,
+    filter: `brightness(0.85)`
+  };
+
   return (
-    <section className="movie-card movie-card--full">
+    <section className="movie-card movie-card--full" style={{backgroundColor}}>
       <div className="movie-card__header">
         <div className="movie-card__bg">
-          <img src="img/bg-the-grand-budapest-hotel.jpg" alt="The Grand Budapest Hotel"/>
+          <img src={backgroundImage} alt={name}/>
         </div>
 
         <h1 className="visually-hidden">WTW</h1>
@@ -19,7 +43,7 @@ export const AddReview: FC = () => {
           <nav className="breadcrumbs">
             <ul className="breadcrumbs__list">
               <li className="breadcrumbs__item">
-                <a href="movie-page.html" className="breadcrumbs__link">The Grand Budapest Hotel</a>
+                <Link to={`/films/${id}`} className="breadcrumbs__link">{name}</Link>
               </li>
               <li className="breadcrumbs__item">
                 <a className="breadcrumbs__link">Add review</a>
@@ -28,7 +52,7 @@ export const AddReview: FC = () => {
           </nav>
         </Header>
         <div className="movie-card__poster movie-card__poster--small">
-          <img src="img/the-grand-budapest-hotel-poster.jpg" alt="The Grand Budapest Hotel poster" width="218"
+          <img src={posterImage} alt={name} width="218"
                height="327"/>
         </div>
       </div>
@@ -53,7 +77,7 @@ export const AddReview: FC = () => {
             </div>
           </div>
 
-          <div className="add-review__text">
+          <div className="add-review__text" style={styled}>
             <textarea className="add-review__textarea" name="review-text" id="review-text"
                       placeholder="Review text"></textarea>
             <div className="add-review__submit">

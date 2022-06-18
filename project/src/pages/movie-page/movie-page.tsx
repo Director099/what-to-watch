@@ -10,13 +10,21 @@ import {Catalog} from "../../components/catalog/catalog";
 import {SmallMovieCard} from "../../components/small-movie-card/small-movie-card";
 import {MovieCardButtons} from "../../components/movie-card-buttons/movie-card-buttons";
 
+interface IMovie {
+  name?: string,
+  genre?: string,
+  released?: string,
+  posterImage?: string,
+  backgroundImage?: string,
+  backgroundColor?: string,
+}
 
 export const MoviePage: FC = () => {
   const MAX_LIKE_MOVIES = 4;
   const {id} = useParams();
   useGate(gateCurrentFilmInit, id);
 
-  const movie = useStore($movie);
+  const movie = useStore<IMovie>($movie);
   const commentFilm = useStore($commentFilm);
   const similarFilms = useStore($similarFilms);
 
@@ -27,7 +35,8 @@ export const MoviePage: FC = () => {
     posterImage,
     backgroundImage,
     backgroundColor
-  }: any = movie;
+  } = movie;
+
   return (
     <>
       <section className="movie-card movie-card--full" style={{backgroundColor}}>

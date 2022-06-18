@@ -1,5 +1,4 @@
 import React, {useState} from 'react';
-// @ts-nocheck
 
 export const CatalogGenresList = ({movie}:any) => {
   const [active, setActive] = useState(0);
