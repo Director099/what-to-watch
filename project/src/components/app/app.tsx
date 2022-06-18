@@ -10,18 +10,13 @@ import {AddReview} from "../../pages/add-review/add-review";
 import {MyList} from "../../pages/my-list/my-list";
 import {PagePlayer} from "../../pages/page-player/page-player";
 import {SignIn} from "../../pages/sign-in/sign-in";
-import avatar from "../../assets/img/avatar.jpg";
 
 export const App = () => {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Main />} />
-        <Route path="/films/:id" element={
-          <MoviePage>
-            <Header imgAvatar={avatar} className="movie-card__head" authorized/>
-          </MoviePage>
-        } />
+        <Route path="/films/:id" element={<MoviePage />} />
         <Route path="/add-review" element={<AddReview/>} />
         <Route path="/my-list" element={<MyList/>} />
         <Route path="/player" element={<PagePlayer/>} />

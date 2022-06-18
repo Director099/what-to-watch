@@ -10,7 +10,6 @@ export const MyList: FC = () => {
   return (
     <UserPage>
       <Header
-        imgAvatar='img/avatar.jpg'
         mainTitle="My list"
         className="user-page__head"
         authorized

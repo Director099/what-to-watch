@@ -8,12 +8,10 @@ import {Catalog} from "../../components/catalog/catalog";
 import {SmallMovieCard} from "../../components/small-movie-card/small-movie-card";
 import {useGate, useStore} from "effector-react";
 import {$commentFilm, $movie, gateCurrentFilmInit} from "../../feature/films/films";
+import {Header} from "../../components/header/header";
 
-interface IMoviePage {
-  children: React.ReactNode
-}
 
-export const MoviePage: FC<IMoviePage> = ({children}) => {
+export const MoviePage: FC = () => {
   const MAX_LIKE_MOVIES = 4;
   const {id} = useParams();
   useGate(gateCurrentFilmInit, id);
@@ -38,7 +36,7 @@ export const MoviePage: FC<IMoviePage> = ({children}) => {
 
           <h1 className="visually-hidden">WTW</h1>
 
-          {children}
+          <Header className="movie-card__head" authorized/>
 
           <div className="movie-card__wrap">
             <div className="movie-card__desc">

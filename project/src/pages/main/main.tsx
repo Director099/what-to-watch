@@ -39,7 +39,7 @@ export const Main: FC = () => {
   return(
     <>
       <MovieCard>
-        <Header imgAvatar={avatar} className="movie-card__head" authorized/>
+        <Header className="movie-card__head" authorized/>
       </MovieCard>
       <PageContent>
         <Catalog title="Catalog">

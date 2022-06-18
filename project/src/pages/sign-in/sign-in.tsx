@@ -8,7 +8,6 @@ export const SignIn: FC = () => {
   return (
     <UserPage>
       <Header
-        imgAvatar='img/avatar.jpg'
         mainTitle="Sign in"
         className="user-page__head"
       />

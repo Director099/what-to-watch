@@ -10,7 +10,7 @@ export const AddReview: FC = () => {
         </div>
 
         <h1 className="visually-hidden">WTW</h1>
-        <Header imgAvatar='img/avatar.jpg' authorized >
+        <Header authorized >
           <nav className="breadcrumbs">
             <ul className="breadcrumbs__list">
               <li className="breadcrumbs__item">
