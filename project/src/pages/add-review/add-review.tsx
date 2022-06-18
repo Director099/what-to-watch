@@ -2,7 +2,7 @@ import React, {FC} from 'react';
 import {Link} from "react-router-dom";
 import {Header} from "../../components/header/header";
 import {useGate, useStore} from "effector-react";
-import {$movie, gateCurrentFilmInit} from "../../feature/films/films";
+import {$movie, gateCurrentFilmInit, submitFormComment} from "../../feature/films/films";
 import {useParams} from "react-router";
 
 interface IMovie {
@@ -81,7 +81,7 @@ export const AddReview: FC = () => {
             <textarea className="add-review__textarea" name="review-text" id="review-text"
                       placeholder="Review text"></textarea>
             <div className="add-review__submit">
-              <button className="add-review__btn" type="submit">Post</button>
+              <button className="add-review__btn" type="button" onClick={() => submitFormComment(id)}>Post</button>
             </div>
 
           </div>

@@ -8,11 +8,13 @@ export const fxCurrentfilm = apiDomain.createEffect<void, any>();
 export const fxPromofilm = apiDomain.createEffect<void, any>();
 export const fxCommetfilm = apiDomain.createEffect<void, any>();
 export const fxSimilarFilms = apiDomain.createEffect<void, any>();
+export const fxCommentPostFilms = apiDomain.createEffect<void, any>();
 
 export const gateInit = createGate<string>("");
 export const gateCurrentFilmInit = createGate<string>("");
 
 export const linkFilm = createEvent<number>();
+export const submitFormComment = createEvent<any>();
 
 fxListfilms.use(() => {
   return fetch( 'https://9.react.pages.academy/wtw/films', {
@@ -38,6 +40,12 @@ fxCommetfilm.use((id) => {
   }).then(response => response.json());
 });
 
+fxCommentPostFilms.use((id) => {
+  return fetch( `https://9.react.pages.academy/wtw/comments/${id}`, {
+    method: 'POST'
+  }).then(response => response.json());
+});
+
 fxSimilarFilms.use((id) => {
   return fetch( `https://9.react.pages.academy/wtw/films/${id}/similar`, {
     method: 'GET'
@@ -48,6 +56,11 @@ fxSimilarFilms.use((id) => {
 forward({
   from: gateInit.open,
   to: [fxListfilms, fxPromofilm]
+});
+
+forward({
+  from: submitFormComment,
+  to: fxCommentPostFilms,
 });
 
 sample({

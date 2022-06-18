@@ -13,9 +13,9 @@ export const MovieNav = ({movie, reviews}: any) => {
       rating={movie?.rating}
     />,
     details: <MovieCardDetails
-      time={movie?.time}
+      runTime={movie?.runTime}
       genre={movie?.genre}
-      year={movie?.year}
+      released={movie?.released}
       director={movie?.director}
       starring={movie?.starring}
     />,
