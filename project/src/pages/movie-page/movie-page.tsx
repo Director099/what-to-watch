@@ -20,7 +20,6 @@ interface IMovie {
 }
 
 export const MoviePage: FC = () => {
-  const MAX_LIKE_MOVIES = 4;
   const {id} = useParams();
   useGate(gateCurrentFilmInit, id);
 
@@ -77,18 +76,17 @@ export const MoviePage: FC = () => {
       <PageContent>
         <Catalog title="More like this" titleVisuallyHidden={false} className="catalog--like-this">
           <div className="catalog__movies-list">
+            {/*Исключить существующий фильм(По id)*/}
             {similarFilms.map(({name, previewImage, videoLink, id}: any, index: number) =>
               <>
-                {index < MAX_LIKE_MOVIES &&
-                  <SmallMovieCard
-                    key={`answer-${index}`}
-                    title={name}
-                    img={previewImage}
-                    prevVideo={videoLink}
-                    className="catalog__movies-card"
-                    id={id}
-                  />
-                }
+                <SmallMovieCard
+                  key={`answer-${index}`}
+                  title={name}
+                  img={previewImage}
+                  prevVideo={videoLink}
+                  className="catalog__movies-card"
+                  id={id}
+                />
               </>
             )}
           </div>
