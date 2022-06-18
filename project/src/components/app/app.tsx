@@ -5,7 +5,6 @@ import {
 } from "react-router-dom";
 import {Main} from "../../pages/main/main";
 import {MoviePage} from "../../pages/movie-page/movie-page";
-import {Header} from "../header/header";
 import {AddReview} from "../../pages/add-review/add-review";
 import {MyList} from "../../pages/my-list/my-list";
 import {PagePlayer} from "../../pages/page-player/page-player";

@@ -8,7 +8,6 @@ import {SmallMovieCard} from "../../components/small-movie-card/small-movie-card
 import {$listFilms, gateInit} from "../../feature/films/films"
 import {useStore} from "effector-react/compat";
 import {useGate} from "effector-react";
-import avatar from "../../assets/img/avatar.jpg";
 
 export const Main: FC = () => {
   useGate(gateInit);

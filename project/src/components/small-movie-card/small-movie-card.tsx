@@ -1,6 +1,7 @@
 import {FC, useState} from 'react';
 import {Link} from "react-router-dom";
 import {PreviewVideo} from "../preview-video/preview-video";
+import {linkFilm} from "../../feature/films/films";
 
 interface ISmallMovieCard {
   title: string,
@@ -32,7 +33,7 @@ export const SmallMovieCard: FC<ISmallMovieCard> = ({title, img, className, prev
         <img src={img} alt={title} width="280" height="175"/>
       </div>
       <h3 className="small-movie-card__title">
-        <Link to={`/films/${id}`} className="small-movie-card__link">{title}</Link>
+        <Link to={`/films/${id}`} className="small-movie-card__link" onClick={() => linkFilm(id)}>{title}</Link>
       </h3>
     </article>
   )

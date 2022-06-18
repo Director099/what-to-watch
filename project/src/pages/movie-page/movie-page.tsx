@@ -4,8 +4,10 @@ import {MovieNav} from "../../components/movie-nav/movie-nav";
 import {Footer} from "../../components/footer/footer";
 import {PageContent} from "../../components/page-content/page-content";
 import {useGate, useStore} from "effector-react";
-import {$commentFilm, $movie, gateCurrentFilmInit} from "../../feature/films/films";
+import {$commentFilm, $movie, $similarFilms, gateCurrentFilmInit} from "../../feature/films/films";
 import {Header} from "../../components/header/header";
+import {Catalog} from "../../components/catalog/catalog";
+import {SmallMovieCard} from "../../components/small-movie-card/small-movie-card";
 
 
 export const MoviePage: FC = () => {
@@ -15,6 +17,8 @@ export const MoviePage: FC = () => {
 
   const movie = useStore($movie);
   const commentFilm = useStore($commentFilm);
+  const similarFilms = useStore($similarFilms);
+
   const {
     name,
     genre,
@@ -75,24 +79,24 @@ export const MoviePage: FC = () => {
         </div>
       </section>
       <PageContent>
-        {/*<Catalog title="More like this" titleVisuallyHidden={false} className="catalog--like-this">*/}
-        {/*  <div className="catalog__movies-list">*/}
-        {/*    {films.map(({title, img, prevVideo, id}: any, index: number) =>*/}
-        {/*      <>*/}
-        {/*        {index < MAX_LIKE_MOVIES &&*/}
-        {/*          <SmallMovieCard*/}
-        {/*            key={`answer-${index}`}*/}
-        {/*            title={title}*/}
-        {/*            img={img}*/}
-        {/*            prevVideo={prevVideo}*/}
-        {/*            className="catalog__movies-card"*/}
-        {/*            id={id}*/}
-        {/*          />*/}
-        {/*        }*/}
-        {/*      </>*/}
-        {/*    )}*/}
-        {/*  </div>*/}
-        {/*</Catalog>*/}
+        <Catalog title="More like this" titleVisuallyHidden={false} className="catalog--like-this">
+          <div className="catalog__movies-list">
+            {similarFilms.map(({name, previewImage, videoLink, id}: any, index: number) =>
+              <>
+                {index < MAX_LIKE_MOVIES &&
+                  <SmallMovieCard
+                    key={`answer-${index}`}
+                    title={name}
+                    img={previewImage}
+                    prevVideo={videoLink}
+                    className="catalog__movies-card"
+                    id={id}
+                  />
+                }
+              </>
+            )}
+          </div>
+        </Catalog>
         <Footer/>
       </PageContent>
     </>
