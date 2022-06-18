@@ -8,6 +8,7 @@ import {$commentFilm, $movie, $similarFilms, gateCurrentFilmInit} from "../../fe
 import {Header} from "../../components/header/header";
 import {Catalog} from "../../components/catalog/catalog";
 import {SmallMovieCard} from "../../components/small-movie-card/small-movie-card";
+import {MovieCardButtons} from "../../components/movie-card-buttons/movie-card-buttons";
 
 
 export const MoviePage: FC = () => {
@@ -47,21 +48,7 @@ export const MoviePage: FC = () => {
                 <span className="movie-card__year">{released}</span>
               </p>
 
-              <div className="movie-card__buttons">
-                <Link to="/player" className="btn btn--play movie-card__button" type="button">
-                  <svg viewBox="0 0 19 19" width="19" height="19">
-                    <use href="#play-s"></use>
-                  </svg>
-                  <span>Play</span>
-                </Link>
-                <button className="btn btn--list movie-card__button" type="button">
-                  <svg viewBox="0 0 19 20" width="19" height="20">
-                    <use href="#add"></use>
-                  </svg>
-                  <span>My list</span>
-                </button>
-                <a href="add-review.html" className="btn movie-card__button">Add review</a>
-              </div>
+              <MovieCardButtons addReview={true} id={id}/>
             </div>
           </div>
         </div>

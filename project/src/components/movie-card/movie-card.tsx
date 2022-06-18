@@ -1,10 +1,10 @@
-import {Link} from "react-router-dom";
-import React from "react";
+import React, {ReactNode} from "react";
 import {useGate, useStore} from "effector-react";
 import {$promoFilm, gateInit} from "../../feature/films/films";
+import {MovieCardButtons} from "../movie-card-buttons/movie-card-buttons";
 
 interface IMovieCard {
-  children: any,
+  children: ReactNode,
 }
 
 export const MovieCard: React.FC<IMovieCard> = ({children}) => {
@@ -35,20 +35,7 @@ export const MovieCard: React.FC<IMovieCard> = ({children}) => {
               <span className="movie-card__year">{released}</span>
             </p>
 
-            <div className="movie-card__buttons">
-              <Link to="/player" className="btn btn--play movie-card__button" type="button">
-                <svg viewBox="0 0 19 19" width="19" height="19">
-                  <use href="#play-s"></use>
-                </svg>
-                <span>Play</span>
-              </Link>
-              <button className="btn btn--list movie-card__button" type="button">
-                <svg viewBox="0 0 19 20" width="19" height="20">
-                  <use href="#add"></use>
-                </svg>
-                <span>My list</span>
-              </button>
-            </div>
+            <MovieCardButtons />
           </div>
         </div>
       </div>

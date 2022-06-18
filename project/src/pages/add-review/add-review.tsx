@@ -1,7 +1,12 @@
 import React, {FC} from 'react';
 import {Header} from "../../components/header/header";
+import {useGate} from "effector-react";
+import {gateCurrentFilmInit} from "../../feature/films/films";
+import {useParams} from "react-router";
 
 export const AddReview: FC = () => {
+  const {id} = useParams();
+  useGate(gateCurrentFilmInit, id);
   return (
     <section className="movie-card movie-card--full">
       <div className="movie-card__header">
