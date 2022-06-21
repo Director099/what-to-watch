@@ -36,13 +36,24 @@ fxCurrentfilm.use((id) => {
 
 fxCommetfilm.use((id) => {
   return fetch( `https://9.react.pages.academy/wtw/comments/${id}`, {
-    method: 'GET'
+    method: 'GET',
+    headers: {
+      'x-token': 'ZmVyejA5OUBtYWlsLnJ1',
+    }
   }).then(response => response.json());
 });
 
 fxCommentPostFilms.use((id) => {
   return fetch( `https://9.react.pages.academy/wtw/comments/${id}`, {
-    method: 'POST'
+    method: 'POST',
+    body: JSON.stringify({
+      comment: "Home is amazing. It's like staying in a museum. The rooms, furnishings and artworks are incredible. The views of My Vesuvius  Home is amazing. It's like staying in a museum. The rooms, furnishings and artworks are incredible. The views of My Vesuvius",
+      rating: 5
+    }),
+    headers: {
+      'x-token': 'ZmVyejA5OUBtYWlsLnJ1',
+      'Content-Type': 'application/json'
+    }
   }).then(response => response.json());
 });
 

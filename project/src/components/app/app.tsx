@@ -19,7 +19,7 @@ export const App = () => {
         <Route path="/films/:id/review" element={<AddReview/>} />
         <Route path="/my-list" element={<MyList/>} />
         <Route path="/player" element={<PagePlayer/>} />
-        <Route path="/sign-in" element={<SignIn />} />
+        <Route path="/login" element={<SignIn />} />
         <Route path="/*" element={<p> 404</p>} />
       </Routes>
     </BrowserRouter>
