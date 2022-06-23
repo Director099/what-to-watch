@@ -18,7 +18,7 @@ export const SmallMovieCard: FC<ISmallMovieCard> = ({title, img, className, prev
   return (
     <article
       className={`small-movie-card ${className}`}
-      onMouseLeave={() => {
+      onMouseOut={() => {
         setMouseOver(false);
         clearTimeout(timer);
       }}

@@ -11,6 +11,7 @@ import {useStore} from "effector-react/compat";
 export const MyList: FC = () => {
   useGate(gateInit);
   const listFilms = useStore($listFilms);
+  const filterFavoriteFilms = listFilms.filter(({isFavorite}) => isFavorite);
 
   return (
     <UserPage>
@@ -21,19 +22,17 @@ export const MyList: FC = () => {
       />
       <Catalog title="Catalog">
         <div className="catalog__movies-list">
-          {listFilms.map(({name, previewImage, videoLink, isFavorite, id}: any, index: number) =>
-            {isFavorite &&
+          {filterFavoriteFilms.length > 0 ? (
+            filterFavoriteFilms.map(({name, previewImage, videoLink, id}: any) =>
               <SmallMovieCard
-                key={`answer-${index}`}
+                key={`answer-${id}`}
                 title={name}
                 img={previewImage}
                 prevVideo={videoLink}
                 className="catalog__movies-card"
                 id={id}
               />
-            }
-          )}
-          {listFilms.every(({isFavorite}) => isFavorite === false) && "Нет избранных фильмов"}
+          )) : "No favorite movies :-("}
         </div>
       </Catalog>
       <Footer/>

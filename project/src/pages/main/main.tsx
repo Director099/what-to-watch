@@ -56,19 +56,15 @@ export const Main: FC = () => {
           </ul>
 
           <div className="catalog__movies-list">
-            {filterFilm.map(({name, previewImage, videoLink, id}: any, index: number) =>
-              <>
-                {index < currentNumberMovies &&
-                  <SmallMovieCard
-                    key={`answer-${index}`}
-                    title={name}
-                    img={previewImage}
-                    prevVideo={videoLink}
-                    className="catalog__movies-card"
-                    id={id}
-                  />
-                }
-              </>
+            {filterFilm.map(({name, previewImage, videoLink, id}: any, index: number) => index < currentNumberMovies &&
+              <SmallMovieCard
+                key={`answer-${id}`}
+                title={name}
+                img={previewImage}
+                prevVideo={videoLink}
+                className="catalog__movies-card"
+                id={id}
+              />
             )}
           </div>
           {currentNumberMovies < filterFilm.length &&

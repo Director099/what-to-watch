@@ -7,7 +7,7 @@ export const submitFormSignIn = createEvent<{}>({});
 
 export const formChange = createEvent<any>({});
 export const $authInfo = createStore<{}>({email: '', password: ''});
-export const $token = createStore(localStorage.getItem('token') ?? null);
+export const $token = createStore(localStorage.getItem('token'));
 
 fxFormSignIn.use((body) => {
   return fetch( `https://9.react.pages.academy/wtw/login`, {

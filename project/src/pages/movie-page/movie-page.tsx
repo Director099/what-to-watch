@@ -1,5 +1,5 @@
 import React, {FC} from 'react';
-import {Link, useParams} from "react-router-dom";
+import {useParams} from "react-router-dom";
 import {MovieNav} from "../../components/movie-nav/movie-nav";
 import {Footer} from "../../components/footer/footer";
 import {PageContent} from "../../components/page-content/page-content";
@@ -20,12 +20,13 @@ interface IMovie {
 }
 
 export const MoviePage: FC = () => {
-  const {id} = useParams();
-  useGate(gateCurrentFilmInit, id);
+  const params = useParams();
+  useGate(gateCurrentFilmInit, params.id);
 
   const movie = useStore<IMovie>($movie);
   const commentFilm = useStore($commentFilm);
   const similarFilms = useStore($similarFilms);
+  const filterSimilarFilms = similarFilms.filter(({id}) => Number(params.id) !== id);
 
   const {
     name,
@@ -56,7 +57,7 @@ export const MoviePage: FC = () => {
                 <span className="movie-card__year">{released}</span>
               </p>
 
-              <MovieCardButtons addReview={true} id={id}/>
+              <MovieCardButtons addReview={true} id={params.id}/>
             </div>
           </div>
         </div>
@@ -76,19 +77,17 @@ export const MoviePage: FC = () => {
       <PageContent>
         <Catalog title="More like this" titleVisuallyHidden={false} className="catalog--like-this">
           <div className="catalog__movies-list">
-            {/*Исключить существующий фильм(По id)*/}
-            {similarFilms.map(({name, previewImage, videoLink, id}: any, index: number) =>
-              <>
+            {filterSimilarFilms.length > 0 ? (
+              filterSimilarFilms.map(({name, previewImage, videoLink, id}: any) =>
                 <SmallMovieCard
-                  key={`answer-${index}`}
+                  key={`answer-${id}`}
                   title={name}
                   img={previewImage}
                   prevVideo={videoLink}
                   className="catalog__movies-card"
                   id={id}
                 />
-              </>
-            )}
+            )) : "No similar films :-("}
           </div>
         </Catalog>
         <Footer/>
