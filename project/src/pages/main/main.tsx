@@ -5,13 +5,14 @@ import {PageContent} from "../../components/page-content/page-content";
 import {Catalog} from "../../components/catalog/catalog";
 import {Footer} from "../../components/footer/footer";
 import {SmallMovieCard} from "../../components/small-movie-card/small-movie-card";
-import {$listFilms, gateInit} from "../../feature/films/films"
+import {$listFilms, gateInit, $promoFilm} from "../../feature/films/films"
 import {useStore} from "effector-react/compat";
 import {useGate} from "effector-react";
 
 export const Main: FC = () => {
   useGate(gateInit);
   const listFilms = useStore($listFilms);
+  const promoFilm = useStore($promoFilm);
 
   const ALL_GENRES = `All genres`;
   const [currentNumberMovies, setCurrentNumberMovies] = useState(8);
@@ -34,7 +35,7 @@ export const Main: FC = () => {
 
   return(
     <>
-      <MovieCard>
+      <MovieCard promoFilm={promoFilm}>
         <Header className="movie-card__head" authorized/>
       </MovieCard>
       <PageContent>

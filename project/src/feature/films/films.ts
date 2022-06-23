@@ -1,5 +1,6 @@
-import {createDomain, createEvent, createStore, forward, restore, sample} from 'effector'
+import {createDomain, createEvent, forward, restore, sample, createStore} from 'effector'
 import {createGate} from "effector-react";
+import {$token, fxIsCompliteAuthorization} from "../authorization/authorization";
 
 //createDomain ?????  / используют с onCreateEffect как абстрактный класс, используют по ситуации
 const apiDomain = createDomain();
@@ -63,15 +64,17 @@ fxSimilarFilms.use((id) => {
   }).then(response => response.json());
 });
 
-// Подробнее изучить про Gate
-forward({
-  from: gateInit.open,
-  to: [fxListfilms, fxPromofilm]
-});
-
 forward({
   from: submitFormComment,
   to: fxCommentPostFilms,
+});
+
+// Подробнее изучить про Gate
+sample({
+  clock: gateInit.open,
+  source: $token,
+  fn: (token) => token,
+  target: [fxIsCompliteAuthorization, fxListfilms, fxPromofilm]
 });
 
 sample({

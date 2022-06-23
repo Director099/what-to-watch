@@ -1,15 +1,12 @@
 import React, {ReactNode} from "react";
-import {useGate, useStore} from "effector-react";
-import {$promoFilm, gateInit} from "../../feature/films/films";
 import {MovieCardButtons} from "../movie-card-buttons/movie-card-buttons";
 
 interface IMovieCard {
   children: ReactNode,
+  promoFilm: {}
 }
 
-export const MovieCard: React.FC<IMovieCard> = ({children}) => {
-  useGate(gateInit);
-  const promoFilm = useStore($promoFilm);
+export const MovieCard: React.FC<IMovieCard> = ({children, promoFilm}) => {
   const {name, posterImage, backgroundImage, genre, released}: any = promoFilm;
 
   return (
